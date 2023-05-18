@@ -13,7 +13,6 @@ import java.util.Set;
 @NoArgsConstructor
 @Entity
 @Table(name = "users", uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"username"}),
         @UniqueConstraint(columnNames = {"email"})
 })
 public class User {
@@ -22,21 +21,11 @@ public class User {
     private long id;
     private String name;
     private String lastname;
-    private String username;
+    @Column(unique = true)
     private String email;
     private String password;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-
-    public User(String name, String lastname, String username, String email, String password) {
-        this.name = name;
-        this.lastname = lastname;
-        this.username = username;
-        this.email = email;
-        this.password = password;
-        this.createdAt = LocalDateTime.now();
-        this.updatedAt = LocalDateTime.now();
-    }
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
@@ -45,4 +34,13 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
     )
     private Set<Role> roles;
+
+    public User(String name, String lastname, String email, String password) {
+        this.name = name;
+        this.lastname = lastname;
+        this.email = email;
+        this.password = password;
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
+    }
 }
