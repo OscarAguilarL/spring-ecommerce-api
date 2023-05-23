@@ -25,16 +25,16 @@ public class WebSecurityConfig {
 
         JwtAuthenticationFilter jwtAuthenticationFilter = new JwtAuthenticationFilter();
         jwtAuthenticationFilter.setAuthenticationManager(authManager);
-        jwtAuthenticationFilter.setFilterProcessesUrl("/api/login");
+        jwtAuthenticationFilter.setFilterProcessesUrl("/api/auth/login");
 
         return http
                 .cors()
                 .and()
                 .csrf().disable()
-                .authorizeHttpRequests()
-                .anyRequest()
-                .authenticated()
-                .and()
+                .authorizeHttpRequests((authorize) -> {
+                    authorize.requestMatchers("/api/auth/**").permitAll();
+                    authorize.anyRequest().authenticated();
+                })
                 .httpBasic()
                 .and()
                 .sessionManagement()
