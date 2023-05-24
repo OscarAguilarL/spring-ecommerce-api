@@ -24,7 +24,7 @@ public class AddressController {
             Address address = addressService.getUserAddress(userId);
             return ResponseHandler.generateResponse(true, "All ok", HttpStatus.OK, address);
         } catch (Exception e) {
-            return ResponseHandler.generateResponse(false, "Internal Server Error", HttpStatus.INTERNAL_SERVER_ERROR, null);
+            return ResponseHandler.generateResponse(false, e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
         }
     }
 
