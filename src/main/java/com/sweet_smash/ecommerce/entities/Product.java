@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -21,7 +22,7 @@ public class Product {
     private String description;
     private double unitPrice;
     @ElementCollection
-    private List<String> images;
+    private List<String> images = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "stock_id")
