@@ -50,8 +50,8 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public UserProfileResponse getUserProfile(String email) {
-        Optional<User> user = this.userRepository.findByEmail(email);
+    public UserProfileResponse getUserProfile(long userId) {
+        Optional<User> user = this.userRepository.findById(userId);
 
         if (user.isEmpty()) {
             throw new UsernameNotFoundException("User not found");

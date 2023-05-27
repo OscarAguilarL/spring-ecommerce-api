@@ -40,10 +40,11 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
         UserDetailsImpl userDetails = (UserDetailsImpl) authResult.getPrincipal();
         String token = TokenUtils.createToken(userDetails.getName(), userDetails.getUsername());
+        long userId = userDetails.getId();
 
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-        response.getWriter().write("{ \"token\": \"" + token + "\" }");
+        response.getWriter().write("{ \"token\": \"" + token + "\", \"userId\": \"" + userId + "\" }");
         response.getWriter().flush();
 
         super.successfulAuthentication(request, response, chain, authResult);
