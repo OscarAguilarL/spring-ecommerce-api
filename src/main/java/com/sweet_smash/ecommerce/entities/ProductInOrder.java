@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 public class ProductInOrder {
 
     @EmbeddedId
-    ProductInOrderKey id;
+    private ProductInOrderKey id;
 
     private int quantity;
 
@@ -32,6 +32,7 @@ public class ProductInOrder {
     private LocalDateTime updatedAt;
 
     public ProductInOrder(int quantity, Order order, Product product) {
+        this.id = new ProductInOrderKey(order.getId(), product.getId());
         this.quantity = quantity;
         this.order = order;
         this.product = product;

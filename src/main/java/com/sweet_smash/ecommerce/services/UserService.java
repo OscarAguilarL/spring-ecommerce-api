@@ -65,4 +65,10 @@ public class UserService {
 
         return responseUser;
     }
+
+    public User findById(long id) {
+        return this.userRepository.findById(id).orElseThrow(
+                () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found")
+        );
+    }
 }
