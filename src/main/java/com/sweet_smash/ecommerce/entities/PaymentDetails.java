@@ -26,9 +26,10 @@ public class PaymentDetails {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    public PaymentDetails(double amount, boolean status) {
+    public PaymentDetails(double amount, boolean status, PaymentType paymentType) {
         this.amount = amount;
         this.status = status;
+        this.paymentType = paymentType;
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
     }
